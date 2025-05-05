@@ -27,6 +27,8 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal_def.h"
+#include "stdint.h"
+#include "stdio.h"
 
 /** @addtogroup STM32F4xx_HAL_Driver
   * @{
@@ -708,6 +710,21 @@ uint32_t HAL_I2C_GetError(I2C_HandleTypeDef *hi2c);
 
 #define I2C_CHECK_FLAG(__ISR__, __FLAG__)         ((((__ISR__) & ((__FLAG__) & I2C_FLAG_MASK)) == ((__FLAG__) & I2C_FLAG_MASK)) ? SET : RESET)
 #define I2C_CHECK_IT_SOURCE(__CR1__, __IT__)      ((((__CR1__) & (__IT__)) == (__IT__)) ? SET : RESET)
+
+union TEST1
+{
+  uint8_t Pmic_data;
+  struct{
+      uint8_t a : 1;
+      uint8_t b : 1;
+      uint8_t c : 1;
+      uint8_t d : 1;
+      uint8_t e : 1;
+      uint8_t f : 1;
+      uint8_t g : 1;
+      uint8_t h : 1;
+  } field;
+} test1;
 /**
   * @}
   */

@@ -36,7 +36,17 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+enum Pmic {
+  MP5424 = 0,
+  TI234, 
+  NXP5664
+};
 
+#define PMICTYPE MP5424
+
+#if (PMICTYPE == MP5424)
+    #define SLAVEADDR 0X69
+#endif
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -68,6 +78,7 @@ static void MX_UART4_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t addr = SLAVEADDR;
 
 /* USER CODE END 0 */
 
@@ -78,7 +89,7 @@ static void MX_UART4_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+    memset(test1,0,sizeof(test1));
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -112,8 +123,18 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    uint8_t i2c_tx_data;
+    uint8_t i2c_tx_addr;
+    uint8_t i2c_rx_data;
+    uint8_t i2c_rx_addr;
+  
+    test1.field.a = 1;
+    i2c_tx_data = test1.Pmic_data;
     /* USER CODE END WHILE */
-
+    HAL_I2C_Master_Transmit();
+    delay_us(100);
+    HAL_I2C_Master_Receive();
+    delay_us(100);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
