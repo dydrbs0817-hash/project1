@@ -65,8 +65,8 @@ all: main-build
 main-build: Comento_I2C_Code.elf secondary-outputs
 
 # Tool invocations
-Comento_I2C_Code.elf: $(OBJS) $(USER_OBJS) D:\comento\test\TEST_Comento\Comento_I2C_Code\STM32F413ZHTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Comento_I2C_Code.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\comento\test\TEST_Comento\Comento_I2C_Code\STM32F413ZHTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Comento_I2C_Code.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Comento_I2C_Code.elf: $(OBJS) $(USER_OBJS) D:\comento\test\commento\TEST_Comento\Comento_I2C_Code\STM32F413ZHTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Comento_I2C_Code.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\comento\test\commento\TEST_Comento\Comento_I2C_Code\STM32F413ZHTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Comento_I2C_Code.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

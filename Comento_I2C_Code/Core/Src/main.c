@@ -153,7 +153,7 @@ int main(void)
     /* USER CODE END WHILE */
 	HAL_I2C_Master_Transmit(); /* 매개 변수를 채워주세요 */
 
-	HAL_I2C_Master_Receive(); /* 매개 변수를 채워주세요 */
+	//HAL_I2C_Master_Receive(); /* 매개 변수를 채워주세요 */
 
     /* USER CODE BEGIN 3 */
   }
