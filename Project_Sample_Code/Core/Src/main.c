@@ -388,12 +388,21 @@ int main(void)
   CanQueueHandle = osMessageQueueNew(8, 8, &CanQueue_attributes);  // CAN 수신 큐 생성
 
   /* Create the thread(s) */
-  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
-  I2CTaskHandle = osThreadNew(StartI2CTask, NULL, &I2CTask_attributes);
-  SPITaskHandle = osThreadNew(StartSPITask, NULL, &SPITask_attributes);
-  CANTaskHandle = osThreadNew(StartCANTask, NULL, &CANTask_attributes);
-  UARTTaskHandle = osThreadNew(StartUARTTask, NULL, &UARTTask_attributes);
+  //defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  //I2CTaskHandle = osThreadNew(StartI2CTask, NULL, &I2CTask_attributes); 
+  //SPITaskHandle = osThreadNew(StartSPITask, NULL, &SPITask_attributes);
+  //CANTaskHandle = osThreadNew(StartCANTask, NULL, &CANTask_attributes);
+  //UARTTaskHandle = osThreadNew(StartUARTTask, NULL, &UARTTask_attributes);
 
+  /* 새 FlowTask만 생성*/
+  const osThreadAttr_t FlowTask_attributes = {
+	.name = "FlowTask",
+	.stack_size = 256 * 4,
+	.priority = (osPriority_t) osPriorityNormal,
+  };
+  osThreadNew(StartFlowTask, NULL, &FlowTask_attributes); // 순차성 보장
+  
+	
   /* Start scheduler */
   osKernelStart();
 
@@ -800,6 +809,8 @@ void StartDefaultTask(void *argument)
   }
   /* USER CODE END 5 */
 }
+
+
 
 // --- SPI EEPROM 쓰기 함수 ---
 void EEPROM_WriteEnable(void) {
